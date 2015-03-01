@@ -1,5 +1,9 @@
 package poissondisc;
 
+/*
+ * Grid upon which the Poisson Disc is generated
+ * Grid width = radius/sqrt(2)
+ */
 public class Grid {
     private final int width;
     private final int height;
@@ -22,12 +26,18 @@ public class Grid {
         }
     }
 
+    /*
+     * Get the square of the grid at given indices
+     */
     public Square getSquare(int row, int col) {
         return grid[row][col];
     }
 
+    /*
+     * Get the square of the grid that contains the given coordinates
+     */
     public Square getSquareContaining(int x, int y) {
-        if (x <= 0 && x < width && y <= 0 && y < height) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
             int row = (int) Math.floor((double) x / unit);
             int col = (int) Math.floor((double) y / unit);
             return grid[row][col];
@@ -35,19 +45,38 @@ public class Grid {
             return null;
     }
 
+    /*
+     * get the width of the grid
+     */
+    public int getWidth() {
+    	return this.width;
+    }
+
+    /*
+     * get the height of the grid
+     */
+    public int getHeight() {
+    	return this.height;
+    }
+
+    /*
+     * get the unit size (cell width) of the grid
+     */
     public int getUnit() {
         return this.unit;
     }
-    
-    public void print() {
-        System.out.println(height);
-        System.out.println(width);
-        System.out.println(unit);
-        System.out.println(rows);
-        System.out.println(cols);
-        Square test = getSquareContaining(639, 960);
-        System.out.println(test.getRow());
-        System.out.println(test.getCol());
+
+    /*
+     * get the number of rows in the grid
+     */
+    public int getRows() {
+    	return this.rows;
     }
 
-}
+    /*
+     * get the number of columns in the grid
+     */
+    public int getCols() {
+    	return this.cols;
+    }
+    }

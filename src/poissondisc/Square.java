@@ -1,13 +1,13 @@
 package poissondisc;
 
 public class Square {
-    private final int length;
+    private final int unit;
     private final int row;
     private final int col;
     private Point point;
     
     public Square(int length, int row, int col) {
-        this.length = length;
+        this.unit = length;
         this.row = row;
         this.col = col;
     }
@@ -33,8 +33,8 @@ public class Square {
         return this.col;
     }
     
-    public int getLength() {
-        return this.length;
+    public int getUnit() {
+        return this.unit;
     }
     
 }

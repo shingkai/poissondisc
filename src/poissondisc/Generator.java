@@ -2,6 +2,11 @@ package poissondisc;
 
 import org.apache.commons.cli.*;
 
+
+/*
+ * Generate a Poisson Disc distribution of a given image's size, then re-color
+ * the pixels by 1-nearest-neighbor sampling of the Poisson Disc Points
+ */
 public class Generator {
     private static final double DEFAULT_RADIUS = 8.0;
     private static final int DEFAULT_ITERS = 10;
@@ -24,13 +29,30 @@ public class Generator {
         this.createGrid();
     }
 
+    /*
+     * Create a grid the size of the image and with column/row widths such
+     * that with all points spaced radius apart, at most 1 point can occupy
+     * any one cell
+     */ 
     private void createGrid() {
         int unit = (int)Math.ceil(radius / Math.sqrt(2));
         this.grid = new Grid(image.getWidth(), image.getHeight(), unit);
-        grid.print();
-        
     }
 
+    /*
+     * Get the grid
+     */
+    public Grid getGrid() {
+    	return this.grid;
+    }
+    
+    /*
+     * Read in the command line arguments
+     * -i : input image file
+     * -o : output image file
+     * -r : maximum distance between any two points of the Poisson Disc
+     * -k : number of points to try when generating new points
+     */
     private static Generator parser(String[] args) {
         CommandLineParser parser = new PosixParser();
         String inputVal = "";
@@ -59,6 +81,13 @@ public class Generator {
         Generator generator = parser(args);
     }
 
+    /*
+     * Command line options
+     * -i : input image file
+     * -o : output image file
+     * -r : maximum distance between any two points of the Poisson Disc
+     * -k : number of points to try when generating new points
+     */
     public static Options poissonOptions() {
         Options options = new Options();
 
