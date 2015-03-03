@@ -25,8 +25,7 @@ public class ImageTest {
         
         testImage = new Image("resources/image.jpg");
         int rgb = testImage.getRGB(0,0);
-        //assertTrue(0 <= rgb && rgb <= 0x00FFFFFF);
-        System.out.println(rgb);
+//        assertEquals(0xFF4e71d5, rgb);
         assertEquals(11776, testImage.getWidth());
         assertEquals(1924, testImage.getHeight());
     }

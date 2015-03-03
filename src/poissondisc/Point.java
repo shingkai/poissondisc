@@ -31,17 +31,17 @@ public class Point {
 
     /*
      * Get the RGB color of this point RGB color in the sRGB format (24 bit),
-     * e.g. 0x00RRGGBB
+     * e.g. 0xFFRRGGBB
      */
     public int getRGB() {
         return this.RGB;
     }
 
     /*
-     * Set the RGB color in sRGB int format (24 bit)
+     * Set the RGB color in sRGB int format (24 bit) e.g. 0xFFRRGGBB
      */
     public boolean setRGB(int RGB) {
-        if (0 <= RGB && RGB <= 0xFFFFFF) {
+        if (0xFF000000 <= RGB && RGB <= 0xFFFFFFFF) {
             this.RGB = RGB;
             return true;
         } else
@@ -74,11 +74,8 @@ public class Point {
     public Point getCandidate(Grid grid) {
         Random rand = new Random();
         double r_min = grid.getRadius();
-        double r_max = r_min * 2;
 
-        double A = 2.0 / (r_max * r_max - r_min * r_min);
-        double r = Math.sqrt(2 * rand.nextDouble() / A + r_min * r_min);
-
+        double r = Math.sqrt(rand.nextDouble() * 3 * Math.pow(r_min, 2) + Math.pow(r_min, 2));
         double t = 2 * Math.PI * rand.nextDouble();
 
         int x = this.x + (int) (r * Math.cos(t));
