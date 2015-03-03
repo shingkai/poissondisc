@@ -36,7 +36,7 @@ public class Generator {
      */ 
     private void createGrid() {
         int unit = (int)Math.ceil(radius / Math.sqrt(2));
-        this.grid = new Grid(image.getWidth(), image.getHeight(), unit);
+        this.grid = new Grid(image.getWidth(), image.getHeight(), unit, radius);
     }
 
     /*

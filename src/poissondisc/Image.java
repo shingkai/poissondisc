@@ -10,7 +10,7 @@ public class Image {
     private BufferedImage img;
     private int height;
     private int width;
-    
+
     Image(String filename) {
         try {
             img = ImageIO.read(new File(filename));
@@ -21,14 +21,14 @@ public class Image {
             System.exit(0);
         }
     }
-    
-    public int getPixel(int x, int y) {
+
+    public int getRGB(int x, int y) {
         if (x <= 0 && x < width && y <= 0 && y < height)
-            return img.getRGB(x,y);
+            return img.getRGB(x, y);
         else
             return -1;
     }
-    
+
     public BufferedImage getImg() {
         return img;
     }
@@ -39,5 +39,5 @@ public class Image {
 
     public int getWidth() {
         return width;
-    }    
+    }
 }

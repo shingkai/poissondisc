@@ -8,14 +8,16 @@ public class Grid {
     private final int width;
     private final int height;
     private final int unit;
+    private final double radius;
     private final int rows;
     private final int cols;
     private Square[][] grid;
 
-    public Grid(int width, int height, int unit) {
+    public Grid(int width, int height, int unit, double radius) {
         this.width = width;
         this.height = height;
         this.unit = unit;
+        this.radius = radius;
         this.rows = (int) Math.ceil((double) height / unit);
         this.cols = (int) Math.ceil((double) width / unit);
         grid = new Square[rows][cols];
@@ -30,7 +32,10 @@ public class Grid {
      * Get the square of the grid at given indices
      */
     public Square getSquare(int row, int col) {
-        return grid[row][col];
+        if (0 <= row && row < rows && 0 <= col && col < cols)
+            return grid[row][col];
+        else
+            return null;
     }
 
     /*
@@ -38,8 +43,8 @@ public class Grid {
      */
     public Square getSquareContaining(int x, int y) {
         if (x >= 0 && x < width && y >= 0 && y < height) {
-            int row = (int) Math.floor((double) x / unit);
-            int col = (int) Math.floor((double) y / unit);
+            int col = (int) Math.floor((double) x / unit);
+            int row = (int) Math.floor((double) y / unit);
             return grid[row][col];
         } else
             return null;
@@ -49,14 +54,14 @@ public class Grid {
      * get the width of the grid
      */
     public int getWidth() {
-    	return this.width;
+        return this.width;
     }
 
     /*
      * get the height of the grid
      */
     public int getHeight() {
-    	return this.height;
+        return this.height;
     }
 
     /*
@@ -67,16 +72,23 @@ public class Grid {
     }
 
     /*
+     * get the radius size (cell diagonal) of the grid
+     */
+    public double getRadius() {
+        return this.radius;
+    }
+
+    /*
      * get the number of rows in the grid
      */
     public int getRows() {
-    	return this.rows;
+        return this.rows;
     }
 
     /*
      * get the number of columns in the grid
      */
     public int getCols() {
-    	return this.cols;
+        return this.cols;
     }
-    }
+}

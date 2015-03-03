@@ -1,22 +1,135 @@
 package poissondisc;
 
 import org.junit.*;
+import static org.junit.Assert.*;
 
 public class GridTest {
-	Generator testGenerator = new Generator("resources/image.jpg", "resources.output.jpg", 8.0, 10);
-	
+	Generator testGenerator;
+	Grid testGrid;
+
+	@Before
+	public void setUp() {
+		testGenerator = new Generator("resources/image.jpg",
+				"resources.output.jpg", 8.0, 10);
+		testGrid = testGenerator.getGrid();
+	}
+
+	@After
+	public void tearDown() {
+		testGenerator = null;
+		testGrid = null;
+	}
+
 	@Test
 	public void testGrid() {
-		Grid testGrid = testGenerator.getGrid();
-		Assert.assertEquals(11776, testGrid.getWidth());
-		Assert.assertEquals(1924, testGrid.getHeight());
-		Assert.assertEquals(6, testGrid.getUnit());
-		Assert.assertEquals(1963, testGrid.getCols());
-		Assert.assertEquals(321, testGrid.getRows());
-		Square testSquare = testGrid.getSquareContaining(0,0);
-		Assert.assertEquals(0, testSquare.getCol());
-		Assert.assertEquals(0, testSquare.getRow());
-		Assert.assertEquals(testGrid.getUnit(), testSquare.getUnit());
+		assertEquals(11776, testGrid.getWidth());
+		assertEquals(1924, testGrid.getHeight());
+		assertEquals(6, testGrid.getUnit());
+		assertEquals(1963, testGrid.getCols());
+		assertEquals(321, testGrid.getRows());
 	}
-    
+
+	@Test
+	public void testGridGetSquare() {
+		Square testSquare = testGrid.getSquare(0, 0);
+		assertEquals(0, testSquare.getRow());
+		assertEquals(0, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquare(0, testGrid.getCols() - 1);
+		assertEquals(0, testSquare.getRow());
+		assertEquals(testGrid.getCols() - 1, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquare(testGrid.getRows() - 1, 0);
+		assertEquals(testGrid.getRows() - 1, testSquare.getRow());
+		assertEquals(0, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquare(testGrid.getRows() - 1,
+				testGrid.getCols() - 1);
+		assertEquals(testGrid.getRows() - 1, testSquare.getRow());
+		assertEquals(testGrid.getCols() - 1, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+	}
+
+	@Test
+	public void testGridGetSquareNulls() {
+		Square testSquare = testGrid.getSquare(-1, -1);
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquare(0, -1);
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquare(-1, 0);
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquare(testGrid.getRows(), testGrid.getCols());
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquare(0, testGrid.getCols());
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquare(testGrid.getRows(), 0);
+		assertEquals(null, testSquare);
+	}
+
+	@Test
+	public void testGridGetSquareContaining() {
+		Square testSquare = testGrid.getSquareContaining(0, 0);
+		assertEquals(0, testSquare.getRow());
+		assertEquals(0, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquareContaining(0, testGrid.getHeight() - 1);
+		assertEquals(testGrid.getRows() - 1, testSquare.getRow());
+		assertEquals(0, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquareContaining(testGrid.getWidth() - 1, 0);
+		assertEquals(0, testSquare.getRow());
+		assertEquals(testGrid.getCols() - 1, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquareContaining(testGrid.getWidth() - 1,
+				testGrid.getHeight() - 1);
+		assertEquals(testGrid.getRows() - 1, testSquare.getRow());
+		assertEquals(testGrid.getCols() - 1, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquareContaining(testGrid.getUnit(),
+				testGrid.getUnit());
+		assertEquals(1, testSquare.getRow());
+		assertEquals(1, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+
+		testSquare = testGrid.getSquareContaining(testGrid.getUnit() - 1,
+				testGrid.getUnit() - 1);
+		assertEquals(0, testSquare.getRow());
+		assertEquals(0, testSquare.getCol());
+		assertEquals(testGrid.getUnit(), testSquare.getUnit());
+	}
+
+	@Test
+	public void testGridGetSquareContainingNulls() {
+		Square testSquare = testGrid.getSquareContaining(-1, -1);
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquareContaining(0, -1);
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquareContaining(-1, 0);
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquareContaining(testGrid.getWidth(),
+				testGrid.getHeight());
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquareContaining(0, testGrid.getHeight());
+		assertEquals(null, testSquare);
+
+		testSquare = testGrid.getSquareContaining(testGrid.getWidth(), 0);
+		assertEquals(null, testSquare);
+
+	}
 }
