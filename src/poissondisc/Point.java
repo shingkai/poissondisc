@@ -78,8 +78,22 @@ public class Point {
         double r = Math.sqrt(rand.nextDouble() * 3 * Math.pow(r_min, 2) + Math.pow(r_min, 2));
         double t = 2 * Math.PI * rand.nextDouble();
 
-        int x = this.x + (int) (r * Math.cos(t));
-        int y = this.y + (int) (r * Math.sin(t));
+        double X = (r * Math.cos(t));
+        double Y = (r * Math.sin(t));
+        
+        // force it to round away from the base point
+        if (X >= 0)
+            X = Math.ceil(X);
+        else
+            X = Math.floor(X);
+
+        if (Y >= 0)
+            Y = Math.ceil(Y);
+        else
+            Y = Math.floor(Y);
+        
+        int x = this.x + (int) X;
+        int y = this.y + (int) Y;
         Point candidate = new Point(x, y);
         return candidate;
     }

@@ -104,9 +104,8 @@ public class testPoint {
             dist = testPoint.getDist(testCandidate);
             if (r > dist) {
                 flag = false;
-                System.err.println(testCandidate.getX() + " " + testCandidate.getY() + " " + dist);
             }
         }
-//        assertTrue(flag);
+        assertTrue(flag);
     }
 }
