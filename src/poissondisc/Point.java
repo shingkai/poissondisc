@@ -73,8 +73,8 @@ public class Point {
      */
     public Point getCandidate(Grid grid) {
         Random rand = new Random();
-        int r_min = (int) grid.getRadius() + 1;
-        int r_max = r_min * 2 - 3;
+        double r_min = grid.getRadius();
+        double r_max = r_min * 2;
 
         double A = 2.0 / (r_max * r_max - r_min * r_min);
         double r = Math.sqrt(2 * rand.nextDouble() / A + r_min * r_min);
