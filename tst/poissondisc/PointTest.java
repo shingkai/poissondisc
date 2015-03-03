@@ -4,7 +4,7 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-public class testPoint {
+public class PointTest {
     Point testPoint;
     private static final int TEST_ITERS = 100000;
     private static final double DELTA = 1e-15;

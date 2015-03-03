@@ -4,6 +4,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class GridTest {
+    private static final double DELTA = 1e-15;
 	Generator testGenerator;
 	Grid testGrid;
 
@@ -24,9 +25,10 @@ public class GridTest {
 	public void testGrid() {
 		assertEquals(11776, testGrid.getWidth());
 		assertEquals(1924, testGrid.getHeight());
-		assertEquals(6, testGrid.getUnit());
-		assertEquals(1963, testGrid.getCols());
-		assertEquals(321, testGrid.getRows());
+		assertEquals(5, testGrid.getUnit());
+		assertEquals(2356, testGrid.getCols());
+		assertEquals(385, testGrid.getRows());
+		assertEquals(8, testGrid.getRadius(), DELTA);
 	}
 
 	@Test

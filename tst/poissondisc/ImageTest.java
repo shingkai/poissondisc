@@ -2,6 +2,7 @@ package poissondisc;
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.rules.ExpectedException;
 
 public class ImageTest {
     Image testImage;
@@ -17,18 +18,23 @@ public class ImageTest {
     }
     
     @Test
-    public void testImage() {
-//        assertEquals(null, testImage.getImg());
-//        assertEquals(0, testImage.getRGB(0, 0));
-//        assertEquals(0, testImage.getWidth());
-//        assertEquals(0, testImage.getHeight());
-        
+    public void testImage() {        
         testImage = new Image("resources/image.jpg");
         int rgb = testImage.getRGB(0,0);
-//        assertEquals(0xFF4e71d5, rgb);
+        assertEquals(0xFF4e71d5, rgb);
         assertEquals(11776, testImage.getWidth());
         assertEquals(1924, testImage.getHeight());
-    }
-    
-    
+
+        rgb = testImage.getRGB(-1,0);
+        assertEquals(-1, rgb);
+        
+        rgb = testImage.getRGB(-1,-1);
+        assertEquals(-1, rgb);
+
+        rgb = testImage.getRGB(0,-1);
+        assertEquals(-1, rgb);
+        
+        rgb = testImage.getRGB(11775,1923);
+        assertEquals(0xFFA69277, rgb);
+    }    
 }
