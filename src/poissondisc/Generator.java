@@ -9,7 +9,7 @@ import org.apache.commons.cli.*;
  */
 public class Generator {
     private static final double DEFAULT_RADIUS = 8.0;
-    private static final int DEFAULT_ITERS = 10;
+    private static final int DEFAULT_ITERS = 25;
     
     private final String input;
     private final String output;
@@ -27,6 +27,7 @@ public class Generator {
         this.iters = iters;
         this.image = new Image(input);
         this.createGrid();
+        Bridson bridson = new Bridson(grid, iters);
     }
 
     /*
@@ -35,8 +36,7 @@ public class Generator {
      * any one cell
      */ 
     private void createGrid() {
-        int unit = (int)(radius / Math.sqrt(2));
-        this.grid = new Grid(image.getWidth(), image.getHeight(), unit, radius);
+        this.grid = new Grid(image.getWidth(), image.getHeight(), radius);
     }
 
     /*

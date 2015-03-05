@@ -66,7 +66,7 @@ public class Point {
     public Square getSquare(Grid grid) {
         return grid.getSquareContaining(x, y);
     }
-
+    
     /*
      * Generate a random uniformly distributed point within the annulus of radii
      * r and 2*r

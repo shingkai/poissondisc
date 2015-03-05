@@ -14,6 +14,7 @@ public class Square {
         this.unit = length;
         this.row = row;
         this.col = col;
+        this.point = null;
     }
 
     /*

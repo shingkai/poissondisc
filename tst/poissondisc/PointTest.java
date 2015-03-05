@@ -61,7 +61,7 @@ public class PointTest {
 
     @Test
     public void testPointGetSquare() {
-        Grid testGrid = new Grid(1024, 1024, 16, 22.6274);
+        Grid testGrid = new Grid(1024, 1024, 24);
         Square testSquare;
         testSquare = testPoint.getSquare(testGrid);
         assertEquals(0, testSquare.getRow());
@@ -92,7 +92,7 @@ public class PointTest {
     
     @Test
     public void testPointGetCandidate() {
-        Grid testGrid = new Grid(512, 512, 16, 22.6274);
+        Grid testGrid = new Grid(512, 512, 24);
         assertTrue(testPoint.setXY(256, 256));
         Point testCandidate;
         double dist;
